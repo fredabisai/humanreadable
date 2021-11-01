@@ -1,6 +1,6 @@
 {
   "name": "humancanread",
-  "version": "1.0.0-beta-1",
+  "version": "1.0.0-beta-2",
   "description": "NPM package which is used to convert javascript variable to human readable texts/strings.",
   "main": "index.js",
   "scripts": {
