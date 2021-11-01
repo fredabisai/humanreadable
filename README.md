@@ -1,14 +1,14 @@
-# HUMANREADABLE
+## HUMANREADABLE
 
 It is npm package which is used to convert javascript variable to human readable texts/strings.
 
-# Installation
+## Installation
 
 `npm i humanreadable --save`
 
-# USAGE
+## USAGE
 
-## 1. LIST
+#### 1. List
 ```
 import {list} from 'humanreadable';
 const readableList = list(['Apple', 'Orange', 'Banana']);
