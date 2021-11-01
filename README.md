@@ -6,7 +6,7 @@ It is npm package which is used to convert javascript variable to human readable
 
 `npm i humanreadable --save`
 
-## USAGE
+## Usage
 
 #### 1. List
 ```
