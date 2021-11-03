@@ -27,3 +27,29 @@ test("Passing a string or number type should throw error", () => {
 
 
 });
+
+/* Test hoursBySeconds function */
+test("Passing 66000 seconds and LONG format should return '18 hours, 20 minutes, 0 seconds'", () => {
+    expect(hoursBySeconds(66000, 'LONG')).toEqual('18 hours, 20 minutes, 0 seconds')
+});
+test("Passing 36489 seconds and LONG format should return '10 hrs, 8 mins, 9 secs'", () => {
+    expect(hoursBySeconds(36489, 'MEDIUM')).toEqual('10 hrs, 8 mins, 9 secs')
+});
+test("Passing 34501 seconds and LONG format should return '09:35:01'", () => {
+    expect(hoursBySeconds(34501, 'SHORT')).toEqual('09:35:01')
+});
+test("Passing invalid seconds or format should throw error", () => {
+    try {
+        hoursBySeconds('Hello', 'SHORT');
+    } catch (e) {
+        expect(e.message).toBe('seconds is not a number');
+    }
+
+    try {
+        hoursBySeconds(3600, 'INVALID')
+    } catch (e) {
+        expect(e.message).toBe('Invalid format, Format should either be LONG, MEDIUM or SHORT');
+    }
+
+
+});
