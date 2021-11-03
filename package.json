@@ -4,9 +4,8 @@
   "description": "NPM package which is used to convert javascript variable to human readable texts/strings.",
   "main": "index.js",
   "scripts": {
-     "test": "jest --config ./jest.config.json",
-     "test:watch": "npm run test -- --watch"
-
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -27,8 +26,9 @@
   "devDependencies": {
     "jest": "^27.3.1"
   },
-  "type": "module",
   "files": [
+    "/utils/main.util.js",
+    "README.md",
     "index.js"
   ]
 }
