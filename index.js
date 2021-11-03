@@ -1,4 +1,4 @@
-const {zeroPad} = require('./utils/main.util');
+const {zeroPad, longMonths, shortMonths} = require('./utils/main.util');
 /**
  * @param {Array.<string | number>} arr - Array of items
  */
@@ -11,7 +11,7 @@ exports.list = function(arr) {
 }
 /**
  * @param {number} seconds - Time Seconds
- * @param {('LONG' | 'MEDIUM' | 'SHORT')} format - Time Seconds
+ * @param {('LONG' | 'MEDIUM' | 'SHORT')} format - Format
  * @return {string} - Hours
  */
 exports.hoursBySeconds = function(seconds, format) {
@@ -44,4 +44,29 @@ exports.hoursBySeconds = function(seconds, format) {
         }
     }
     throw new Error('seconds is not a number');
+}
+/**
+ * @param {number} monthNum - Month Number
+ * @param {('LONG' | 'SHORT')} format - Format
+ * @return {string} - Month Name
+ */
+exports.monthByNumber = function(monthNum, format= 'LONG') {
+    if(typeof monthNum === 'number') {
+        if(monthNum < 1 || monthNum > 12) {
+            throw new Error('monthNum is out of range');
+        }
+        if(monthNum % 1 !== 0) {
+            throw new Error('monthNum should not have decimal places');
+        }
+        let month = '';
+        if(format === 'LONG') {
+            month = longMonths()[monthNum - 1];
+        } else if(format === 'SHORT') {
+            month = shortMonths()[monthNum -1]
+        } else {
+            throw new Error('Invalid format, Format should either be LONG or SHORT');
+        }
+        return month;
+    }
+    throw new Error('monthNum is not a number');
 }
