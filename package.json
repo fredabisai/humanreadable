@@ -27,6 +27,8 @@
     "jest": "^27.3.1"
   },
   "files": [
+    "/utils/main.util.js",
+    "README.md",
     "index.js"
   ]
 }
