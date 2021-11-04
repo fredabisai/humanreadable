@@ -77,3 +77,13 @@ exports.dayByNumber = function(dayNum, format= 'LONG') {
     }
     throw new Error('dayNum is not a number');
 }
+/**
+ * @param {number} num - Number
+ * @return {string} - Comma separated number
+ */
+exports.commaSeparatedNumber = function(num) {
+    if(typeof num === 'number'){
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    throw new Error('Wrong num type, function expects num to be number');
+}
