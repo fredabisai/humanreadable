@@ -64,3 +64,14 @@ const day = dayByNumber(1, 'LONG');
 const day = dayByNumber(3, 'SHORT');
 // Result: Tue
 ```
+#### 5. commaSeparatedNumber
+Returns comma separated number by passing a number
+```
+/*
+* parameters: num
+* num: number
+*/
+import {commaSeparatedNumber} from 'humancanread';
+const newNum = commaSeparatedNumber(3400000);
+// Result: 3,400,000
+```
