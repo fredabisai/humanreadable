@@ -1,4 +1,4 @@
-const {zeroPad, longMonths, shortMonths} = require('./utils/main.util');
+const {zeroPad, longMonths, shortMonths, longDayNames, shortDayNames} = require('./utils/main.util');
 /**
  * @param {Array.<string | number>} arr - Array of items
  */
@@ -20,9 +20,7 @@ exports.hoursBySeconds = function(seconds, format) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor(seconds % 3600 / 60);
             const secs = Math.floor(seconds % 3600 % 60);
-            let hoursToDisplay = '';
-            let minutesToDisplay = '';
-            let secondsToDisplay = '';
+            let hoursToDisplay = ''; let minutesToDisplay = ''; let secondsToDisplay = '';
             if(format === 'LONG') {
                 hoursToDisplay =  hours > 0 ? hours + (hours === 1 ? " hour, " : " hours, ") : "0 hours, ";
                 minutesToDisplay = minutes > 0 ? minutes + (minutes === 1 ? " minute, " : " minutes, ") : "0 minutes, ";
@@ -52,21 +50,30 @@ exports.hoursBySeconds = function(seconds, format) {
  */
 exports.monthByNumber = function(monthNum, format= 'LONG') {
     if(typeof monthNum === 'number') {
-        if(monthNum < 1 || monthNum > 12) {
-            throw new Error('monthNum is out of range');
-        }
-        if(monthNum % 1 !== 0) {
-            throw new Error('monthNum should not have decimal places');
-        }
+        if(monthNum < 1 || monthNum > 12) {throw new Error('monthNum is out of range');}
+        if(monthNum % 1 !== 0) {throw new Error('monthNum should not have decimal places');}
         let month = '';
-        if(format === 'LONG') {
-            month = longMonths()[monthNum - 1];
-        } else if(format === 'SHORT') {
-            month = shortMonths()[monthNum -1]
-        } else {
-            throw new Error('Invalid format, Format should either be LONG or SHORT');
-        }
+        if(format === 'LONG') { month = longMonths()[monthNum - 1];
+        } else if(format === 'SHORT') { month = shortMonths()[monthNum -1]
+        } else {throw new Error('Invalid format, Format should either be LONG or SHORT');}
         return month;
     }
     throw new Error('monthNum is not a number');
+}
+/**
+ * @param {number} dayNum - Day Number
+ * @param {('LONG' | 'SHORT')} format - Format
+ * @return {string} - Day Name
+ */
+exports.dayByNumber = function(dayNum, format= 'LONG') {
+    if(typeof dayNum === 'number') {
+        if(dayNum < 1 || dayNum > 12) {throw new Error('dayNum is out of range');}
+        if(dayNum % 1 !== 0) {throw new Error('dayNum should not have decimal places');}
+        let day = '';
+        if(format === 'LONG') { day = longDayNames()[dayNum - 1];
+        } else if(format === 'SHORT') { day = shortDayNames()[dayNum -1]
+        } else {throw new Error('Invalid format, Format should either be LONG or SHORT');}
+        return day;
+    }
+    throw new Error('dayNum is not a number');
 }

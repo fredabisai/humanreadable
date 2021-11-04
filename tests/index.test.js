@@ -14,21 +14,12 @@ test("Passing array ['Apple'] in list function should return text 'Apple'", () =
     expect(list(['Apple'])).toEqual('Apple');
 });
 test("Passing a string or number type should throw error", () => {
-    try {
-        list('Bike');
-    } catch (e) {
-        expect(e.message).toBe('arr is not array of string or number');
-    }
-    try {
-        list(10);
-    } catch (e) {
-        expect(e.message).toBe('arr is not array of string or number');
-    }
-
-
+    try {list('Bike');} catch (e) {
+        expect(e.message).toBe('arr is not array of string or number');}
+    try {list(10);} catch (e) {
+        expect(e.message).toBe('arr is not array of string or number');}
 });
-
-/* Test hoursBySeconds function */
+/* Tests hoursBySeconds function */
 test("Passing 66000 seconds and LONG format should return '18 hours, 20 minutes, 0 seconds'", () => {
     expect(hoursBySeconds(66000, 'LONG')).toEqual('18 hours, 20 minutes, 0 seconds')
 });
@@ -39,17 +30,10 @@ test("Passing 34501 seconds and LONG format should return '09:35:01'", () => {
     expect(hoursBySeconds(34501, 'SHORT')).toEqual('09:35:01')
 });
 test("Passing invalid seconds or format should throw error", () => {
-    try {
-        hoursBySeconds('Hello', 'SHORT');
+    try {hoursBySeconds('Hello', 'SHORT');} catch (e) {
+        expect(e.message).toBe('seconds is not a number');}
+    try {hoursBySeconds(3600, 'INVALID')
     } catch (e) {
-        expect(e.message).toBe('seconds is not a number');
-    }
-
-    try {
-        hoursBySeconds(3600, 'INVALID')
-    } catch (e) {
-        expect(e.message).toBe('Invalid format, Format should either be LONG, MEDIUM or SHORT');
-    }
-
-
+        expect(e.message).toBe('Invalid format, Format should either be LONG, MEDIUM or SHORT');}
 });
+/* monthByNumber tests */
