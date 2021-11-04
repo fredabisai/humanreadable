@@ -67,7 +67,7 @@ exports.monthByNumber = function(monthNum, format= 'LONG') {
  */
 exports.dayByNumber = function(dayNum, format= 'LONG') {
     if(typeof dayNum === 'number') {
-        if(dayNum < 1 || dayNum > 12) {throw new Error('dayNum is out of range');}
+        if(dayNum < 1 || dayNum > 7) {throw new Error('dayNum is out of range');}
         if(dayNum % 1 !== 0) {throw new Error('dayNum should not have decimal places');}
         let day = '';
         if(format === 'LONG') { day = longDayNames()[dayNum - 1];
