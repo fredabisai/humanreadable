@@ -1,6 +1,6 @@
 ## HUMANCANREAD
 
-It is npm package which is used to convert javascript variable to human readable texts/strings.
+It is package which is used to convert javascript variable to human-readable texts/strings.
 
 ## Installation
 
@@ -9,6 +9,7 @@ It is npm package which is used to convert javascript variable to human readable
 ## Usage
 
 #### 1. list
+Returns human-readable list of items from an array
 ```
 /*
 * parameters: arr
@@ -19,6 +20,7 @@ const readableList = list(['Apple', 'Orange', 'Banana']);
 // Result: Apple, Orange and Banana
 ```
 #### 2. hoursBySeconds
+Returns hours, minutes and seconds according to format by passing seconds
 ```
 /*
 * parameters: seconds, format
@@ -33,4 +35,32 @@ const hoursMedium = hoursBySeconds(36489, 'MEDIUM');
 // Result: 10 hrs, 8 mins, 9 secs
 const hoursShort = hoursBySeconds(34501, 'SHORT')
 // Result: 09:35:01
+```
+#### 3. monthByNumber
+Returns month name by passing a number
+```
+/*
+* parameters: monthNum and format
+* monthNum: number
+* format: 'LONG' | 'SHORT'
+*/
+import {monthByNumber} from 'humancanread';
+const month = monthByNumber(1, 'LONG');
+// Result: January
+const month = monthByNumber(3, 'SHORT');
+// Result: Mar
+```
+#### 4. dayByNumber
+Returns day name by passing a number
+```
+/*
+* parameters: dayNum and format
+* dayNum: number
+* format: 'LONG' | 'SHORT'
+*/
+import {dayByNumber} from 'humancanread';
+const day = dayByNumber(1, 'LONG');
+// Result: Sunday
+const day = dayByNumber(3, 'SHORT');
+// Result: Tue
 ```
