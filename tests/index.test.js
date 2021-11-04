@@ -1,5 +1,5 @@
 const { expect, test } = require('@jest/globals');
-const  {list, hoursBySeconds, monthByNumber, dayByNumber} = require('../index');
+const  {list, hoursBySeconds, monthByNumber, dayByNumber, commaSeparatedNumber} = require('../index');
 /* Tests for list function */
 describe( 'list', () => {
     test("list: Passing array [1, 2, 3] in list function should return text '1, 2 and 3'", () => {
@@ -66,6 +66,16 @@ describe( 'dayByNumber', () => {
     test("dayByNumber: Passing wrong format should return wrong format error", () => {
         try {dayByNumber(4, 'UNKNOWN')} catch (e) {
             expect(e.message).toBe('Invalid format, Format should either be LONG or SHORT')}
+    });
+});
+/* commaSeparatedNumber tests */
+describe( 'commaSeparatedNumber', () => {
+    test("commaSeparatedNumber: Passing 3400000  should return 3,400,000", () => {
+        expect(commaSeparatedNumber(3400000)).toEqual('3,400,000')});
+    test("commaSeparatedNumber: Passing 200  should return 200", () => {
+        expect(commaSeparatedNumber(200)).toEqual('200')});
+    test("commaSeparatedNumber: Passing string  should return Wrong num type", () => {
+        try{commaSeparatedNumber('hello')}catch (e) {expect(e.message).toEqual('Wrong num type, function expects num to be number');}
     });
 });
 
