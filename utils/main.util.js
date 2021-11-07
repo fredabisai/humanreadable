@@ -17,10 +17,10 @@ exports.zeroPad = function(num, places) {
 /**
  * @param {*} item - Time Seconds
  * @param {('number' | 'string' | 'boolean')} type - Time Seconds
- * @param {string} message - Time Seconds
+ * @param {string} variableName - Time Seconds
  */
-exports.throwWrongTypeError = function(item, type, message) {
+exports.throwWrongTypeError = function(item, type, variableName) {
     if(typeof item !== type) {
-        throw new Error(message);
+        throw new Error('Wrong ' + variableName + ' type, the function expects '+ variableName + ' to be a ' + type);
     }
 }
