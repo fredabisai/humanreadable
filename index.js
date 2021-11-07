@@ -1,4 +1,4 @@
-const {zeroPad, longMonths, shortMonths, longDayNames, shortDayNames} = require('./utils/main.util');
+const {zeroPad, longMonths, shortMonths, longDayNames, shortDayNames, siFileUnits, iecFileUnits, throwWrongTypeError} = require('./utils/main.util');
 /**
  * @param {Array.<string | number>} arr - Array of items
  */
@@ -75,7 +75,7 @@ exports.dayByNumber = function(dayNum, format= 'LONG') {
         } else {throw new Error('Invalid format, Format should either be LONG or SHORT');}
         return day;
     }
-    throw new Error('dayNum is not a number');
+    throwWrongTypeError(dayNum, typeof dayNum, 'dayNum');
 }
 /**
  * @param {number} num - Number
@@ -85,5 +85,30 @@ exports.commaSeparatedNumber = function(num) {
     if(typeof num === 'number'){
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    throw new Error('Wrong num type, function expects num to be number');
+    throwWrongTypeError(num, typeof num, 'num');
+}
+/**
+ * @param {number} bytes Number of bytes.
+ * @param {boolean} isSI True to use metric (SI) units / powers of 1000. False to use binary (IEC), / powers of 1024.
+ * @param {number} dp Number of decimal places to display.
+ * @return {string} Formatted string.
+ */
+exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
+    if(typeof bytes === "number") {
+        throwWrongTypeError(isSI, typeof isSI, 'isSI');
+        throwWrongTypeError(dp, typeof dp, 'dp')
+        const threshold = isSI ? 1000 : 1024;
+        if (Math.abs(bytes) < threshold) {
+            return bytes + ' B';
+        }
+        const units = isSI ? siFileUnits() : iecFileUnits();
+        let index = -1;
+        const r = 10 ** dp;
+        do {
+            bytes /= threshold;
+            ++index;
+        } while (Math.round(Math.abs(bytes) * r) / r >= threshold && index < units.length - 1);
+        return bytes.toFixed(dp) + ' ' + units[index];
+    }
+    throwWrongTypeError(bytes, typeof bytes, 'bytes');
 }

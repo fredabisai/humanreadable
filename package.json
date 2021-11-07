@@ -15,7 +15,13 @@
     "string",
     "text",
     "readable",
-    "human"
+    "human",
+    "humanize",
+    "file",
+    "english",
+    "word",
+    "date",
+    "comma"
   ],
   "author": "Fredrick Abisai",
   "license": "ISC",
