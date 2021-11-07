@@ -18,6 +18,8 @@
     "human",
     "humanize",
     "file",
+    "english",
+    "word",
     "date",
     "comma"
   ],
