@@ -75,7 +75,7 @@ describe( 'commaSeparatedNumber', () => {
     test("commaSeparatedNumber: Passing 200  should return 200", () => {
         expect(commaSeparatedNumber(200)).toEqual('200')});
     test("commaSeparatedNumber: Passing string  should return Wrong num type", () => {
-        try{commaSeparatedNumber('hello')}catch (e) {expect(e.message).toEqual('Wrong num type, function expects num to be number');}
+        try{commaSeparatedNumber('hello')}catch (e) {expect(e.message).toEqual('Wrong num type, the function expects num to be number');}
     });
 });
 

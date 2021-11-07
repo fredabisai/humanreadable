@@ -85,7 +85,7 @@ exports.commaSeparatedNumber = function(num) {
     if(typeof num === 'number'){
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
-    throw new Error('Wrong num type, function expects num to be number');
+    throwWrongTypeError(num, typeof num, 'num');
 }
 /**
  * @param {number} bytes Number of bytes.
@@ -95,8 +95,8 @@ exports.commaSeparatedNumber = function(num) {
  */
 exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
     if(typeof bytes === "number") {
-        throwWrongTypeError(isSI, 'boolean', 'isSI');
-        throwWrongTypeError(dp, 'number', 'dp')
+        throwWrongTypeError(isSI, typeof isSI, 'isSI');
+        throwWrongTypeError(dp, typeof dp, 'dp')
         const threshold = isSI ? 1000 : 1024;
         if (Math.abs(bytes) < threshold) {
             return bytes + ' B';
@@ -110,5 +110,5 @@ exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
         } while (Math.round(Math.abs(bytes) * r) / r >= threshold && index < units.length - 1);
         return bytes.toFixed(dp) + ' ' + units[index];
     }
-    throwWrongTypeError(bytes, 'number', 'bytes');
+    throwWrongTypeError(bytes, typeof bytes, 'bytes');
 }
