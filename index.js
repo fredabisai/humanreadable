@@ -75,7 +75,7 @@ exports.dayByNumber = function(dayNum, format= 'LONG') {
         } else {throw new Error('Invalid format, Format should either be LONG or SHORT');}
         return day;
     }
-    throw new Error('dayNum is not a number');
+    throwWrongTypeError(dayNum, typeof dayNum, 'dayNum');
 }
 /**
  * @param {number} num - Number
