@@ -95,12 +95,8 @@ exports.commaSeparatedNumber = function(num) {
  */
 exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
     if(typeof bytes === "number") {
-        throwWrongTypeError(isSI, 'boolean', 'isSI should be a boolean');
-        throwWrongTypeError(dp, 'number', 'dp should be a number')
-
-        if(typeof dp !== "boolean") {
-            throw new Error('isSI should be boolean')
-        }
+        throwWrongTypeError(isSI, 'boolean', 'isSI');
+        throwWrongTypeError(dp, 'number', 'dp')
         const threshold = isSI ? 1000 : 1024;
         if (Math.abs(bytes) < threshold) {
             return bytes + ' B';
@@ -114,5 +110,5 @@ exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
         } while (Math.round(Math.abs(bytes) * r) / r >= threshold && index < units.length - 1);
         return bytes.toFixed(dp) + ' ' + units[index];
     }
-    throwWrongTypeError(bytes, 'number', 'bytes should be a number');
+    throwWrongTypeError(bytes, 'number', 'bytes');
 }
