@@ -75,3 +75,16 @@ import {commaSeparatedNumber} from 'humancanread';
 const newNum = commaSeparatedNumber(3400000);
 // Result: 3,400,000
 ```
+#### 6. fileSizeByBytes
+Returns file size string by passing bytes
+```
+/*
+* parameters: bytes, isSI and dp
+* bytes: number
+* isSI: boolean - True to use metric (SI) units / powers of 1000. False to use binary (IEC), / powers of 1024
+* dp: number - Decimal places
+*/
+import {fileSizeByBytes} from 'humancanread';
+const fileSize = fileSizeByBytes(2048);
+// Result: 2.0 KiB
+```

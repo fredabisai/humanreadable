@@ -89,7 +89,7 @@ exports.commaSeparatedNumber = function(num) {
 }
 /**
  * @param {number} bytes Number of bytes.
- * @param {boolean} isSI True to use metric (SI) units, aka powers of 1000. False to use binary (IEC), aka powers of 1024.
+ * @param {boolean} isSI True to use metric (SI) units / powers of 1000. False to use binary (IEC), / powers of 1024.
  * @param {number} dp Number of decimal places to display.
  * @return {string} Formatted string.
  */
