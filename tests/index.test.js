@@ -1,5 +1,5 @@
 const { expect, test } = require('@jest/globals');
-const  {list, hoursBySeconds, monthByNumber, dayByNumber, commaSeparatedNumber} = require('../index');
+const  {list, hoursBySeconds, monthByNumber, dayByNumber, commaSeparatedNumber, fileSizeByBytes} = require('../index');
 /* Tests for list function */
 describe( 'list', () => {
     test("list: Passing array [1, 2, 3] in list function should return text '1, 2 and 3'", () => {
@@ -76,6 +76,21 @@ describe( 'commaSeparatedNumber', () => {
         expect(commaSeparatedNumber(200)).toEqual('200')});
     test("commaSeparatedNumber: Passing string  should return Wrong num type", () => {
         try{commaSeparatedNumber('hello')}catch (e) {expect(e.message).toEqual('Wrong num type, function expects num to be number');}
+    });
+});
+
+/* commaSeparatedNumber tests */
+describe( 'fileSizeByBytes', () => {
+    test("fileSizeByBytes: Passing 2048 bytes  should return 2 KiB", () => {
+        expect(fileSizeByBytes(2048)).toEqual('2.0 KiB')});
+    test("fileSizeByBytes: Passing 3000000 bytes  with isSI true should return 3 MB ", () => {
+        expect(fileSizeByBytes(3000000, true)).toEqual('3.0 MB')});
+    test("fileSizeByBytes: Passing 3500 bytes  with dp 2 should return 3 KiB ", () => {
+        expect(fileSizeByBytes(3500, false, 2)).toEqual('3.42 KiB')});
+    test("fileSizeByBytes: Passing wrong parameters  should return Wrong type errors", () => {
+        try{fileSizeByBytes('hello')}catch (e) {expect(e.message).toBe('Wrong bytes type, the function expects bytes to be a number');}
+        try{fileSizeByBytes(3000, 'hello')}catch (e) {expect(e.message).toBe('Wrong isSI type, the function expects isSI to be a boolean');}
+        try{fileSizeByBytes(3000, true, 'hello')}catch (e) {expect(e.message).toBe('Wrong dp type, the function expects dp to be a number');}
     });
 });
 
