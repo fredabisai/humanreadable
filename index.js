@@ -1,4 +1,6 @@
-const {zeroPad, longMonths, shortMonths, longDayNames, shortDayNames, siFileUnits, iecFileUnits, throwWrongTypeError} = require('./utils/main.util');
+const {zeroPad, longMonths, shortMonths, longDayNames, shortDayNames, siFileUnits, iecFileUnits, throwWrongTypeError,
+    throwWrongFormatError
+} = require('./utils/main.util');
 /**
  * @param {Array.<string | number>} arr - Array of items
  */
@@ -37,10 +39,7 @@ exports.hoursBySeconds = function(seconds, format) {
                 throw new Error('Invalid format, Format should either be LONG, MEDIUM or SHORT');
             }
             return `${hoursToDisplay}${minutesToDisplay}${secondsToDisplay}`
-        } catch(error) {
-            throw error;
-        }
-    }
+        } catch(error) {throw error;}}
     throw new Error('seconds is not a number');
 }
 /**
@@ -55,11 +54,8 @@ exports.monthByNumber = function(monthNum, format= 'LONG') {
         let month = '';
         if(format === 'LONG') { month = longMonths()[monthNum - 1];
         } else if(format === 'SHORT') { month = shortMonths()[monthNum -1]
-        } else {throw new Error('Invalid format, Format should either be LONG or SHORT');}
-        return month;
-    }
-    throw new Error('monthNum is not a number');
-}
+        } else {throwWrongFormatError(format, false)}return month;}
+    throw new Error('monthNum is not a number');}
 /**
  * @param {number} dayNum - Day Number
  * @param {('LONG' | 'SHORT')} format - Format
@@ -111,4 +107,17 @@ exports.fileSizeByBytes = function (bytes,isSI= false, dp= 1) {
         return bytes.toFixed(dp) + ' ' + units[index];
     }
     throwWrongTypeError(bytes, typeof bytes, 'bytes');
+}
+/**
+ * @param {Date | string} date - Date in format MM/dd/yyyy or   MM-dd-yyyy
+ * @param {('LONG' | 'MEDIUM' | 'SHORT')} format - Format
+ * @return {string} - Years
+ */
+exports.ageInYearsByDate = function (date, format) {
+      const birthDate = new Date(date);const ageDifMs = Date.now() - birthDate.getTime();
+      const ageDate = new Date(ageDifMs);
+      const years = Math.abs(ageDate.getUTCFullYear() - 1970);
+      if(isNaN(years)) {throw new Error('Invalid date format');}
+      const yearsByFormat = {'LONG': `${years} years old`, 'MEDIUM': years.toString() + ' years', 'SHORT': years.toString() };
+      return yearsByFormat.hasOwnProperty(format) ? yearsByFormat[format] : throwWrongFormatError(format);
 }
