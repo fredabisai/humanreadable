@@ -81,10 +81,29 @@ Returns file size string by passing bytes
 /*
 * parameters: bytes, isSI and dp
 * bytes: number
-* isSI: boolean - True to use metric (SI) units / powers of 1000. False to use binary (IEC), / powers of 1024
+* isSI: boolean - True to use metric (SI) units / powers of 1000.
+ * False to use binary (IEC), / powers of 1024
 * dp: number - Decimal places
 */
 import {fileSizeByBytes} from 'humancanread';
 const fileSize = fileSizeByBytes(2048);
 // Result: 2.0 KiB
+```
+#### 7. ageInYearsByDate
+Returns age in years by date
+```
+/*
+* parameters: date, format
+* date: date | Date
+* format: 'LONG' | 'MEDIUM' | 'SHORT'
+*/
+// Today's date is 11/10/2021
+import {ageInYearsByDate} from 'humancanread';
+
+const yearsLong = ageInYearsByDate('10/11/2000', 'LONG');
+// Result: 21 years old
+const yearsMedium = ageInYearsByDate('10/11/2000', 'MEDIUM');
+// Result: 21 years old
+const yearsShort = ageInYearsByDate('10/11/2000', 'SHORT')
+// Result: 21
 ```

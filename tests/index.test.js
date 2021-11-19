@@ -1,5 +1,5 @@
 const { expect, test } = require('@jest/globals');
-const  {list, hoursBySeconds, monthByNumber, dayByNumber, commaSeparatedNumber, fileSizeByBytes} = require('../index');
+const  {list, hoursBySeconds, monthByNumber, dayByNumber, commaSeparatedNumber, fileSizeByBytes, ageInYearsByDate} = require('../index');
 /* Tests for list function */
 describe( 'list', () => {
     test("list: Passing array [1, 2, 3] in list function should return text '1, 2 and 3'", () => {
@@ -91,6 +91,26 @@ describe( 'fileSizeByBytes', () => {
         try{fileSizeByBytes('hello')}catch (e) {expect(e.message).toBe('Wrong bytes type, the function expects bytes to be a number');}
         try{fileSizeByBytes(3000, 'hello')}catch (e) {expect(e.message).toBe('Wrong isSI type, the function expects isSI to be a boolean');}
         try{fileSizeByBytes(3000, true, 'hello')}catch (e) {expect(e.message).toBe('Wrong dp type, the function expects dp to be a number');}
+    });
+});
+/* commaSeparatedNumber tests */
+describe( 'ageInYearsByDate', () => {
+    const date = new Date().getDate();
+    const month = new Date().getMonth();
+    const year = new Date().getFullYear();
+    const yearDiff = year - 1994;
+    test(`ageInYearsByDate: Passing ${month}/${date}/1994 and LONG format should return ${yearDiff} years old`, () => {
+        expect(ageInYearsByDate(`${month}/${date}/1994`, 'LONG')).toEqual(`${yearDiff} years old`)});
+    test(`ageInYearsByDate: Passing ${month}/${date}/1994 and MEDIUM format should return ${yearDiff} years`, () => {
+        expect(ageInYearsByDate(`${month}/${date}/1994`, 'MEDIUM')).toEqual(`${yearDiff} years`)});
+    test(`ageInYearsByDate: Passing ${month}/${date}/1994 and SHORT format should return ${yearDiff}`, () => {
+        expect(ageInYearsByDate(`${month}/${date}/1994`, 'SHORT')).toEqual(`${yearDiff}`)});
+    test("ageInYearsByDate: Passing wrong date format  should return Wrong date format error", () => {
+        try{ageInYearsByDate('25/01/2010', 'LONG')}catch (e) {expect(e.message).toBe('Invalid date format');}
+    });
+    test("ageInYearsByDate: Passing wrong format  should return Wrong format error", () => {
+        try{ageInYearsByDate(`${month}/${date}/1994`, 'UNKNOWN')}catch (e) {expect(e.message)
+            .toBe('Invalid format, Format should either be LONG, MEDIUM or SHORT');}
     });
 });
 
