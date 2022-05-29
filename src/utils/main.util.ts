@@ -26,6 +26,9 @@ export const shortMonths: string[] = [
   'Nov',
   'Dec',
 ];
+export const longDayNames: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const shortDayNames: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 export const zeroPad = (num: number, places: number): string => {
   const zero = places - num.toString().length + 1;
   return Array(+(zero > 0 && zero)).join('0') + num;
