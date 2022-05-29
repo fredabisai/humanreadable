@@ -4,7 +4,7 @@ import {
   shortMonths,
   throwWrongFormatError,
   longDayNames,
-  shortDayNames,
+  shortDayNames, siFileUnits, iecFileUnits,
 } from './utils/main.util';
 
 export function list(arr: (string | number)[]): string {
@@ -79,4 +79,18 @@ export function dayByNumber(dayNum: number, format: 'LONG' | 'SHORT' = 'LONG'): 
 }
 export function commaSeparatedNumber(num: number): string {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+export function fileSizeByBytes(bytes: number,isSI: boolean= false, dp:number = 1) {
+  const threshold = isSI ? 1000 : 1024;
+  if (Math.abs(bytes) < threshold) {
+    return bytes + ' B';
+  }
+  const units = isSI ? siFileUnits : iecFileUnits;
+  let index = -1;
+  const r = 10 ** dp;
+  do {
+    bytes /= threshold;
+    ++index;
+  } while (Math.round(Math.abs(bytes) * r) / r >= threshold && index < units.length - 1);
+  return bytes?.toFixed(dp) + ' ' + units[index];
 }
