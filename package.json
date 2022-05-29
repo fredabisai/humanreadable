@@ -30,7 +30,8 @@
   },
   "homepage": "https://github.com/fredabisai/humanreadable#readme",
   "devDependencies": {
-    "jest": "^27.3.1"
+    "jest": "^27.3.1",
+    "typescript": "^4.7.2"
   },
   "files": [
     "/utils/main.util.js",
