@@ -43,7 +43,7 @@ export function hoursBySeconds(seconds: number, format: 'LONG' | 'MEDIUM' | 'SHO
     throw error;
   }
 }
-function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
+export function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
   if (monthNum < 1 || monthNum > 12) {
     throw new Error('monthNum is out of range');
   }
@@ -60,7 +60,7 @@ function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG'): str
   }
   return month;
 }
-function dayByNumber(dayNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
+export function dayByNumber(dayNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
   if (dayNum < 1 || dayNum > 7) {
     throw new Error('dayNum is out of range');
   }
@@ -76,4 +76,7 @@ function dayByNumber(dayNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string 
     throw new Error('Invalid format, Format should either be LONG or SHORT');
   }
   return day;
+}
+export function commaSeparatedNumber(num: number): string {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
