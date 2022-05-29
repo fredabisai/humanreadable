@@ -2,10 +2,19 @@
   "name": "humancanread",
   "version": "1.0.0-beta-6",
   "description": "NPM package which is used to convert javascript variable to human readable texts/strings.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config ./jest.config.json",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -31,11 +40,10 @@
   "homepage": "https://github.com/fredabisai/humanreadable#readme",
   "devDependencies": {
     "jest": "^27.3.1",
+    "prettier": "^2.6.2",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.7.2"
   },
-  "files": [
-    "/utils/main.util.js",
-    "README.md",
-    "index.js"
-  ]
+  "files": ["lib/**/*"]
 }
