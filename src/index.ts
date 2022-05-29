@@ -1,4 +1,11 @@
-import { zeroPad, longMonths, shortMonths, throwWrongFormatError } from './utils/main.util';
+import {
+  zeroPad,
+  longMonths,
+  shortMonths,
+  throwWrongFormatError,
+  longDayNames,
+  shortDayNames,
+} from './utils/main.util';
 
 export function list(arr: (string | number)[]): string {
   if (Array.isArray(arr) && arr.every((i) => typeof i === 'string' || typeof i === 'number')) {
@@ -36,7 +43,7 @@ export function hoursBySeconds(seconds: number, format: 'LONG' | 'MEDIUM' | 'SHO
     throw error;
   }
 }
-function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG') {
+function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
   if (monthNum < 1 || monthNum > 12) {
     throw new Error('monthNum is out of range');
   }
@@ -52,4 +59,21 @@ function monthByNumber(monthNum: number, format: 'LONG' | 'SHORT' = 'LONG') {
     throwWrongFormatError(format, false);
   }
   return month;
+}
+function dayByNumber(dayNum: number, format: 'LONG' | 'SHORT' = 'LONG'): string {
+  if (dayNum < 1 || dayNum > 7) {
+    throw new Error('dayNum is out of range');
+  }
+  if (dayNum % 1 !== 0) {
+    throw new Error('dayNum should not have decimal places');
+  }
+  let day: string = '';
+  if (format === 'LONG') {
+    day = longDayNames[dayNum - 1];
+  } else if (format === 'SHORT') {
+    day = shortDayNames[dayNum - 1];
+  } else {
+    throw new Error('Invalid format, Format should either be LONG or SHORT');
+  }
+  return day;
 }
