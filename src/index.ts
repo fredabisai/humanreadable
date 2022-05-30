@@ -97,17 +97,17 @@ export function fileSizeByBytes(bytes: number, isSI: boolean = false, dp: number
   return bytes?.toFixed(dp) + ' ' + units[index];
 }
 export function ageInYearsByDate(date: string, format: 'LONG' | 'MEDIUM' | 'SHORT'): string {
- if( !isNaN(new Date(date)?.getDate())) {
-   const birthDate = new Date(date);
-   const ageDifMs = Date.now() - birthDate.getTime();
-   const ageDate = new Date(ageDifMs);
-   const years = Math.abs(ageDate.getUTCFullYear() - 1970);
-   if (isNaN(years)) {
-     throw new Error('Invalid date format');
-   }
-   const yearsByFormat = {LONG: `${years} years old`, MEDIUM: years.toString() + ' years', SHORT: years.toString()};
-   return yearsByFormat?.hasOwnProperty(format) ? yearsByFormat[format] : '';
- } else {
-   throw new Error('Invalid date format')
- }
+  if (!isNaN(new Date(date)?.getDate())) {
+    const birthDate = new Date(date);
+    const ageDifMs = Date.now() - birthDate.getTime();
+    const ageDate = new Date(ageDifMs);
+    const years = Math.abs(ageDate.getUTCFullYear() - 1970);
+    if (isNaN(years)) {
+      throw new Error('Invalid date format');
+    }
+    const yearsByFormat = { LONG: `${years} years old`, MEDIUM: years.toString() + ' years', SHORT: years.toString() };
+    return yearsByFormat?.hasOwnProperty(format) ? yearsByFormat[format] : '';
+  } else {
+    throw new Error('Invalid date format');
+  }
 }
