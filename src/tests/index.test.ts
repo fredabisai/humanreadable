@@ -42,11 +42,10 @@ describe( 'monthByNumber', () => {
     test("monthByNumber: Passing 3 and SHORT FORMAT  should return short name Mar", () => {
         expect(monthByNumber(3, 'SHORT')).toEqual('Mar')});
     test("monthByNumber: Passing 13 should return out of range error", () => {
-        try {monthByNumber(13)} catch (e) {
-            console.log(e);
+        try {monthByNumber(13)} catch (e: any) {
             expect(e?.message).toBe('monthNum is out of range')}});
     test("monthByNumber: Passing 9.5 should return decimal places error", () => {
-        try {monthByNumber(9.5)} catch (e) {
+        try {monthByNumber(9.5)} catch (e: any) {
             expect(e?.message).toBe('monthNum should not have decimal places')}});
 });
 /* dayByNumber tests */
@@ -56,9 +55,9 @@ describe( 'dayByNumber', () => {
     test("dayByNumber: Passing 3 and SHORT FORMAT  should return long name Tue", () => {
         expect(dayByNumber(3, 'SHORT')).toEqual('Tue')});
     test("dayByNumber: Passing 13 should return out of range error", () => {
-        try {dayByNumber(1)} catch (e) {expect(e?.message).toBe('dayNum is out of range')}});
+        try {dayByNumber(1)} catch (e: any) {expect(e?.message).toBe('dayNum is out of range')}});
     test("dayByNumber: Passing 5.5 should return decimal places error", () => {
-        try {dayByNumber(5.5)} catch (e) {expect(e?.message).toBe('dayNum should not have decimal places')}});
+        try {dayByNumber(5.5)} catch (e: any) {expect(e?.message).toBe('dayNum should not have decimal places')}});
 });
 /* commaSeparatedNumber tests */
 describe( 'commaSeparatedNumber', () => {
@@ -91,7 +90,7 @@ describe( 'ageInYearsByDate', () => {
     test(`ageInYearsByDate: Passing ${month}/${date}/1994 and SHORT format should return ${yearDiff}`, () => {
         expect(ageInYearsByDate(`${month}/${date}/1994`, 'SHORT')).toEqual(`${yearDiff}`)});
     test("ageInYearsByDate: Passing wrong date format  should return Wrong date format error", () => {
-        try{ageInYearsByDate('25/01/2010', 'LONG')}catch (e) {expect(e?.message).toBe('Invalid date format');}
+        try{ageInYearsByDate('25/01/2010', 'LONG')}catch (e: any) {expect(e?.message).toBe('Invalid date format');}
     });
 });
 
